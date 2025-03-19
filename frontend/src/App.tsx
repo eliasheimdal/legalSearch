@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Reporter } from "./interfaces/interfaces";
+import MultipleSelectChip from "./components/select";
 
 type ReportersData = { [key: string]: Reporter[] };
 
 function App() {
   const [reporters, setReporters] = useState<ReportersData>({});
   const [filterText, setFilterText] = useState("");
+  const [selectedJurisdiction, setSelectedJurisdiction] = useState<string[]>([]);
+
+  const receiveJurisdictionChange = (jurData : string[]) => {
+    setSelectedJurisdiction(jurData);
+  }
 
   useEffect(() => {
     fetch("https://localhost:5001/api/reporters")
@@ -16,17 +21,22 @@ function App() {
       .catch((error) => console.error("Error fetching reporters:", error));
   }, []);
 
-  // Handle changes in the filter input
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilterText(e.target.value);
   };
 
-  // Filter the reporters based on the reporter's name
   const filteredReporters: ReportersData = Object.entries(reporters).reduce(
     (acc, [key, reporterList]) => {
-      const filteredList = reporterList.filter((reporter) =>
+      const filteredName = reporterList.filter((reporter) =>
         reporter.name.toLowerCase().includes(filterText.toLowerCase())
       );
+      const filteredList = selectedJurisdiction.length
+        ? filteredName.filter((reporter) =>
+            reporter.mlz_jurisdiction?.some((jurisdiction) =>
+              selectedJurisdiction.includes(jurisdiction)
+            )
+          )
+        : filteredName;
       if (filteredList.length > 0) {
         acc[key] = filteredList;
       }
@@ -34,6 +44,11 @@ function App() {
     },
     {} as ReportersData
   );
+
+  const jurisdictions: string[] = Object.values(reporters)
+    .flat()
+    .flatMap((reporter) => reporter.mlz_jurisdiction ?? [])
+    .filter((value, index, self) => self.indexOf(value) === index);
 
   return (
     <div>
@@ -44,6 +59,7 @@ function App() {
         value={filterText}
         onChange={handleFilterChange}
       />
+      <MultipleSelectChip data={jurisdictions} receiveJurisdictionChange={receiveJurisdictionChange}/>
       <div>
         {Object.entries(filteredReporters).map(([key, reporterList]) => (
           <div key={key}>
@@ -60,6 +76,6 @@ function App() {
       </div>
     </div>
   );
-};
+}
 
 export default App;
