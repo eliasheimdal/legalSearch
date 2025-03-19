@@ -1,79 +1,37 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { Reporter } from "./interfaces/interfaces";
-import MultipleSelectChip from "./components/select";
-
-type ReportersData = { [key: string]: Reporter[] };
+import ReportersTab from "./components/reportersTab";
+import LawsTab from "./components/lawsTab";
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 function App() {
-  const [reporters, setReporters] = useState<ReportersData>({});
-  const [filterText, setFilterText] = useState("");
-  const [selectedJurisdiction, setSelectedJurisdiction] = useState<string[]>([]);
+  const [value, setValue] = React.useState(0);
 
-  const receiveJurisdictionChange = (jurData : string[]) => {
-    setSelectedJurisdiction(jurData);
-  }
-
-  useEffect(() => {
-    fetch("https://localhost:5001/api/reporters")
-      .then((response) => response.json())
-      .then((data) => setReporters(data))
-      .catch((error) => console.error("Error fetching reporters:", error));
-  }, []);
-
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilterText(e.target.value);
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+    console.log(newValue);
   };
-
-  const filteredReporters: ReportersData = Object.entries(reporters).reduce(
-    (acc, [key, reporterList]) => {
-      const filteredName = reporterList.filter((reporter) =>
-        reporter.name.toLowerCase().includes(filterText.toLowerCase())
-      );
-      const filteredList = selectedJurisdiction.length
-        ? filteredName.filter((reporter) =>
-            reporter.mlz_jurisdiction?.some((jurisdiction) =>
-              selectedJurisdiction.includes(jurisdiction)
-            )
-          )
-        : filteredName;
-      if (filteredList.length > 0) {
-        acc[key] = filteredList;
-      }
-      return acc;
-    },
-    {} as ReportersData
-  );
-
-  const jurisdictions: string[] = Object.values(reporters)
-    .flat()
-    .flatMap((reporter) => reporter.mlz_jurisdiction ?? [])
-    .filter((value, index, self) => self.indexOf(value) === index);
 
   return (
     <div>
-      <h1>Reporters</h1>
-      <input
-        type="text"
-        placeholder="Filter by reporter name..."
-        value={filterText}
-        onChange={handleFilterChange}
-      />
-      <MultipleSelectChip data={jurisdictions} receiveJurisdictionChange={receiveJurisdictionChange}/>
-      <div>
-        {Object.entries(filteredReporters).map(([key, reporterList]) => (
-          <div key={key}>
-            <h2>{key}</h2>
-            <ul>
-              {reporterList.map((reporter, index) => (
-                <li key={index}>
-                  {reporter.name} - {reporter.cite_type}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
+      <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+        <Tabs value={value} onChange={handleChange} centered>
+          <Tab label="Reporters" />
+          <Tab label="Laws" />
+          <Tab label="Item Three" />
+        </Tabs>
+      </Box>
+      {value === 0 ? (
+        <ReportersTab />
+      ) : value === 1 ? (
+        <LawsTab />
+      ) : value === 2 ? (
+        <div>
+          <h1>Item Three</h1>
+        </div>
+      ) : null}
     </div>
   );
 }

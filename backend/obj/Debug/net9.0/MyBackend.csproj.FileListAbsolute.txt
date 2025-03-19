@@ -35,7 +35,6 @@
 /Users/eliasheimdal/legalSearch/MyBackend/bin/Debug/net9.0/data/reporters_export.json
 /Users/eliasheimdal/legalSearch/backend/bin/Debug/net9.0/appsettings.Development.json
 /Users/eliasheimdal/legalSearch/backend/bin/Debug/net9.0/appsettings.json
-/Users/eliasheimdal/legalSearch/backend/bin/Debug/net9.0/data/reporters_export.json
 /Users/eliasheimdal/legalSearch/backend/bin/Debug/net9.0/MyBackend.staticwebassets.endpoints.json
 /Users/eliasheimdal/legalSearch/backend/bin/Debug/net9.0/MyBackend
 /Users/eliasheimdal/legalSearch/backend/bin/Debug/net9.0/MyBackend.deps.json
@@ -68,3 +67,9 @@
 /Users/eliasheimdal/legalSearch/backend/obj/Debug/net9.0/MyBackend.pdb
 /Users/eliasheimdal/legalSearch/backend/obj/Debug/net9.0/MyBackend.genruntimeconfig.cache
 /Users/eliasheimdal/legalSearch/backend/obj/Debug/net9.0/ref/MyBackend.dll
+/Users/eliasheimdal/legalSearch/backend/bin/Debug/net9.0/reporters_db/data/case_name_abbreviations.json
+/Users/eliasheimdal/legalSearch/backend/bin/Debug/net9.0/reporters_db/data/journals.json
+/Users/eliasheimdal/legalSearch/backend/bin/Debug/net9.0/reporters_db/data/laws.json
+/Users/eliasheimdal/legalSearch/backend/bin/Debug/net9.0/reporters_db/data/regexes.json
+/Users/eliasheimdal/legalSearch/backend/bin/Debug/net9.0/reporters_db/data/reporters_export.json
+/Users/eliasheimdal/legalSearch/backend/bin/Debug/net9.0/reporters_db/data/state_abbreviations.json

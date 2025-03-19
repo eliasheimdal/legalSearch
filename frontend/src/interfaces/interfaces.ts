@@ -5,3 +5,15 @@ export interface Reporter {
     name: string;
     variations: { [key: string]: string };
   }
+
+export interface Laws {
+    cite_type: string;
+    name: string;
+    end: string;
+    examples: string[];
+    href: string;
+    jurisdiction: string;
+    regexes: string[];
+    start: string;
+    variations: string[];
+  }

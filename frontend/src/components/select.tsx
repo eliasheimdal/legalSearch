@@ -29,10 +29,11 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 
 interface MultipleSelectChipProps {
     data: string[];
-    receiveJurisdictionChange: (jurData: string[]) => void;
+    receiveChange: (change: string[]) => void;
+    name: string;
   }
   
-  export default function MultipleSelectChip({ data, receiveJurisdictionChange }: MultipleSelectChipProps & { receiveJurisdictionChange: (jurData: string[]) => void; }) {
+  export default function MultipleSelectChip({ data, receiveChange, name }: MultipleSelectChipProps & { receiveChange: (change: string[]) => void; }) {
     const theme = useTheme();
     const [selectedData, setSelectedData] = React.useState<string[]>([]);
   
@@ -42,13 +43,13 @@ interface MultipleSelectChipProps {
         } = event;
         const newSelectedData = typeof value === 'string' ? value.split(',') : value;
         setSelectedData(newSelectedData);
-        receiveJurisdictionChange(newSelectedData);
+        receiveChange(newSelectedData);
       };
       
   
     return (
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-chip-label">Jurisdictions</InputLabel>
+        <InputLabel id="demo-multiple-chip-label">{name}</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
