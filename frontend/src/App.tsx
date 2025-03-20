@@ -16,7 +16,13 @@ function App() {
 
   return (
     <div className="App">
-      <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+      <header className="App-header">
+        <h1>
+          Data <br />
+          Free Law Project
+        </h1>
+      </header>
+      <Box className="App-box">
         <Tabs value={value} onChange={handleChange} centered>
           <Tab label="Reporters" />
           <Tab label="Laws" />
@@ -32,6 +38,12 @@ function App() {
           <h1>Item Three</h1>
         </div>
       ) : null}
+      <footer className="App-footer">
+        <p>
+          Copyright (c) 2014, Free Law Project <br />
+          All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 }
