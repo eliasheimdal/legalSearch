@@ -46,37 +46,48 @@ interface MultipleSelectChipProps {
         receiveChange(newSelectedData);
       };
       
+      const clear = () => {
+        const cleared: string[] = [];
+        setSelectedData(cleared);
+        receiveChange(cleared);
+      };
   
     return (
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-chip-label">{name}</InputLabel>
-        <Select
-          labelId="demo-multiple-chip-label"
-          id="demo-multiple-chip"
-          multiple
-          value={selectedData}
-          onChange={handleChange}
-          input={<OutlinedInput id="select-multiple-chip" label="Jurisdictions" />}
-          renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
-          )}
-          MenuProps={MenuProps}
-        >
-          {data.map((datas) => (
-            <MenuItem
-              key={datas}
-              value={datas}
-              style={getStyles(datas, selectedData, theme)}
-            >
-              {datas}
-            </MenuItem>
+<div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+  <FormControl sx={{ m: 1, width: 300 }}>
+    <InputLabel id="demo-multiple-chip-label">{name}</InputLabel>
+    <Select
+      labelId="demo-multiple-chip-label"
+      id="demo-multiple-chip"
+      multiple
+      value={selectedData}
+      onChange={handleChange}
+      input={<OutlinedInput id="select-multiple-chip" label="Jurisdictions" />}
+      renderValue={(selected) => (
+        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+          {selected.map((value) => (
+            <Chip key={value} label={value} />
           ))}
-        </Select>
-      </FormControl>
+        </Box>
+      )}
+      MenuProps={MenuProps}
+    >
+      {data.map((datas) => (
+        <MenuItem
+          key={datas}
+          value={datas}
+          style={getStyles(datas, selectedData, theme)}
+        >
+          {datas}
+        </MenuItem>
+      ))}
+    </Select>
+  </FormControl>
+  <button className="button" onClick={() => clear()}>
+    Clear
+  </button>
+</div>
+
     );
   }
   

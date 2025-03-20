@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MultipleSelectChip from "./select";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import { Reporter } from "../interfaces/interfaces";
 
 type ReportersData = { [key: string]: Reporter[] };
@@ -53,29 +55,28 @@ const ReportersTab = () => {
   return (
     <div>
       <h1>Reporters</h1>
-      <input
-        type="text"
-        placeholder="Filter by reporter name..."
+      <div className="filter">
+      <Box>
+      <TextField
+        id="demo-helper-text-misaligned"
+        label="Filter by name..."
         value={filterText}
         onChange={handleFilterChange}
       />
+    </Box>
       <MultipleSelectChip
         data={jurisdictions}
         receiveChange={receiveJurisdictionChange}
         name="Jurisdictions"
       />
-      <MultipleSelectChip
-        data={jurisdictions}
-        receiveChange={receiveJurisdictionChange}
-        name="Jurisdictions"
-      />
+      </div>
       <div>
         {Object.entries(filteredReporters).map(([key, reporterList]) => (
           <div key={key}>
-            <h2>{key}</h2>
-            <ul>
+            <h2 className="h2">{key}</h2>
+            <ul className="ul">
               {reporterList.map((reporter, index) => (
-                <li key={index}>
+                <li  key={index}>
                   {reporter.name} - {reporter.cite_type}
                 </li>
               ))}

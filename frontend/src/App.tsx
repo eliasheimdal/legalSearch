@@ -15,7 +15,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="App">
       <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
         <Tabs value={value} onChange={handleChange} centered>
           <Tab label="Reporters" />
