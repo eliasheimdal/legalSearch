@@ -7,15 +7,9 @@ Dette prosjektet er en fullstack-demonstrasjon som integrerer Free Law Reporters
 - [Introduksjon](#introduksjon)
 - [Funksjoner](#funksjoner)
 - [Teknologi](#teknologi)
-- [Prosjektstruktur](#prosjektstruktur)
 - [Installasjon og kjøring](#installasjon-og-kjøring)
   - [Backend (.NET API)](#backend-net-api)
   - [Frontend (React)](#frontend-react)
-- [Bruk](#bruk)
-- [Feilsøking](#feilsøking)
-- [Bidrag](#bidrag)
-- [Lisens](#lisens)
-- [Kontakt](#kontakt)
 
 ## Introduksjon
 
@@ -53,10 +47,10 @@ Denne applikasjonen demonstrerer evnen til å utvikle en fullstack-løsning ved 
 
 1. **Klon repositoryet:**
 
-   ```
-   git clone <repo-url>
-   cd MyBackend
-   ```
+```
+git clone <repo-url>
+cd MyBackend
+```
 2. **Gjenopprett avhengigheter og bygg prosjektet:**
 
 ```
